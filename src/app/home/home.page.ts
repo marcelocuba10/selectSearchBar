@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,25 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  users = [];
+
+  constructor(
+    private http: HttpClient
+  ) {
+    this.loadUsers();
+  }
+
+
+  loadUsers(){
+    this.http.get('https://dummyjson.com/users?limit=10')
+    .subscribe((res:any) =>{
+      this.users = res.users;
+      console.log(this.users);
+    });
+  }
+
+  selectChanged(event:any){
+    console.log('changed: ', event);
+  }
 
 }

@@ -1,0 +1,36 @@
+
+<div *ngIf="selected.length; else placeholder">
+  <span *ngFor="let item of selected; let last = last" >
+    {{ item.firstName }} {{ last ? "" : ", " }}
+  </span>
+</div>
+
+<ng-template #placeholder>
+  Select
+</ng-template>
+
+<ion-modal [isOpen]="isOpen" mode="ios">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Modal</ion-title>
+        <ion-buttons slot="end" *ngIf="multiple">
+          <ion-button (click)="select()">Select</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-toolbar>
+        <ion-searchbar (ionChange)="filter($any($event))"></ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-item *ngFor="let item of filtered" (click)="itemSelected()">
+        <ion-checkbox slot="start" 
+        [(ngModel)]="item.selected"></ion-checkbox>
+        <ion-label>{{ item.firstName }}</ion-label>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>
