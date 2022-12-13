@@ -1,0 +1,7 @@
+{
+  "name": "selectSearchBar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
